@@ -1,7 +1,7 @@
 <template>
     <nav>
-        <RouterLink to="/">Events</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink :to="{ name: 'EventList' }">Events</RouterLink> |
+        <RouterLink :to="{ name: 'About' }">About</RouterLink>
     </nav>
     <RouterView />
 </template>
@@ -30,9 +30,5 @@
 
     h4 {
         font-size: 20px;
-    }
-
-    p {
-        margin: 0;
     }
 </style>
