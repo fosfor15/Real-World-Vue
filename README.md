@@ -1,24 +1,5 @@
-# real-world-vue
+### Real World Vue 3
 
-## Project setup
-```
-npm install
-```
+A site for events to better the World!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+https://real-world-vue-3-xg3x.onrender.com/
