@@ -17,7 +17,7 @@
     import EventsService from '@/services/EventsService';
 
     export default {
-        name: 'EventListView',
+        name: 'EventList',
 
         components: {
             EventCard
@@ -36,14 +36,14 @@
                 })
                 .catch(error => console.log(error));
 
-            /* this.$watch(
+            this.$watch(
                 () => this.$route,
                 (oldRoute, newRoute) => {
                     console.log('this.$router :>> ', this.$router);
                     console.log('oldRoute :>> ', oldRoute);
                     console.log('newRoute :>> ', newRoute);
                 }
-            ); */
+            );
         }
     };
 </script>
