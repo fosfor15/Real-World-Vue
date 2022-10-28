@@ -6,7 +6,27 @@
     <RouterView />
 </template>
 
+<script>
+export default {
+    created() {
+        this.$watch(
+            () => this.$route,
+            (newRoute, oldRoute) => {
+                console.log('this.$router :>> ', this.$router);
+                console.log('this.$route :>> ', this.$route);
+                // console.log('newRoute :>> ', newRoute);
+                // console.log('oldRoute :>> ', oldRoute);
+            }
+        );
+    }
+}
+</script>
+
 <style>
+    body {
+        background-color: #f8f8f8;
+    }
+
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -14,7 +34,9 @@
         text-align: center;
         color: #2c3e50;
     }
+</style>
 
+<style scoped>
     nav {
         padding: 30px;
     }
