@@ -1,8 +1,20 @@
 <template>
     <div v-if="event">
         <h1>{{ event.title }}</h1>
-        <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
-        <p>{{ event.description }}</p>
+
+        <nav>
+            <RouterLink :to="{ name: 'EventDetails' }">
+                Details
+            </RouterLink> | 
+            <RouterLink :to="{ name: 'EventRegister' }">
+                Register
+            </RouterLink> | 
+            <RouterLink :to="{ name: 'EventEdit' }">
+                Edit
+            </RouterLink>
+        </nav>
+
+        <RouterView :event="event"></RouterView>
     </div>
 </template>
 
@@ -11,8 +23,8 @@
 
     export default {
         name: 'EventDetails',
-        
-        props: ['id'],
+
+        props: [ 'id' ],
 
         data() {
             return {
