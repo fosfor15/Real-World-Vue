@@ -6,7 +6,7 @@
     <RouterView />
 </template>
 
-<script>
+<!-- <script>
 export default {
     created() {
         this.$watch(
@@ -20,7 +20,7 @@ export default {
         );
     }
 }
-</script>
+</script> -->
 
 <style>
     body {
@@ -34,9 +34,7 @@ export default {
         text-align: center;
         color: #2c3e50;
     }
-</style>
 
-<style scoped>
     nav {
         padding: 30px;
     }
