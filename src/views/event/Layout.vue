@@ -3,15 +3,9 @@
         <h1>{{ event.title }}</h1>
 
         <nav>
-            <RouterLink :to="{ name: 'EventDetails' }">
-                Details
-            </RouterLink> | 
-            <RouterLink :to="{ name: 'EventRegister' }">
-                Register
-            </RouterLink> | 
-            <RouterLink :to="{ name: 'EventEdit' }">
-                Edit
-            </RouterLink>
+            <RouterLink :to="{ name: 'EventDetails' }">Details</RouterLink> |
+            <RouterLink :to="{ name: 'EventRegister' }">Register</RouterLink> |
+            <RouterLink :to="{ name: 'EventEdit' }">Edit</RouterLink>
         </nav>
 
         <RouterView :event="event"></RouterView>
@@ -24,7 +18,7 @@
     export default {
         name: 'EventDetails',
 
-        props: [ 'id' ],
+        props: ['id'],
 
         data() {
             return {
