@@ -28,7 +28,6 @@
             </RouterLink>
         </nav>
     </div>
-    
 </template>
 
 <script>
@@ -39,9 +38,7 @@
     export default {
         name: 'EventList',
 
-        props: [
-            'page'
-        ],
+        props: ['page'],
 
         components: {
             EventCard
@@ -61,13 +58,19 @@
                         this.events = response.data;
                         this.totalEvents = response.headers['x-total-count'];
                     })
-                    .catch(error => console.log(error));
-            })    
+                    .catch(error => {
+                        console.log(error);
+
+                        this.$router.push({
+                            name: 'NetworkError'
+                        });
+                    });
+            });
         },
 
         computed: {
             hasNextPage() {
-                return this.page < Math.ceil( this.totalEvents / 2 );
+                return this.page < Math.ceil(this.totalEvents / 2);
             }
         }
     };
