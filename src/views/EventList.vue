@@ -13,18 +13,20 @@
         <nav class="pagination">
             <RouterLink
                 :to="{ name: 'EventList', query: { page: page - 1 } }"
+                id="page-prev"
                 rel="prev"
                 v-if="page != 1"
             >
-                Prev
+                &lt; Prev
             </RouterLink>
 
             <RouterLink
                 :to="{ name: 'EventList', query: { page: page + 1 } }"
+                id="page-next"
                 rel="next"
                 v-if="hasNextPage"
             >
-                Next
+                Next &gt;
             </RouterLink>
         </nav>
     </div>
@@ -33,7 +35,8 @@
 <script>
     import EventCard from '@/components/EventCard.vue';
     import EventsService from '@/services/EventsService';
-    import { watchEffect } from 'vue';
+
+    import Nprogres from 'nprogress';
 
     export default {
         name: 'EventList',
@@ -51,21 +54,38 @@
             };
         },
 
-        created() {
-            watchEffect(() => {
-                EventsService.getEvents(2, this.page)
-                    .then(response => {
-                        this.events = response.data;
-                        this.totalEvents = response.headers['x-total-count'];
-                    })
-                    .catch(error => {
-                        console.log(error);
+        beforeRouteEnter(routeTo, routeFrom, next) {
+            Nprogres.start();
 
-                        this.$router.push({
-                            name: 'NetworkError'
-                        });
+            EventsService.getEvents(2, parseInt(routeTo.query.page) || 1)
+                .then(response => {
+                    next(comp => {
+                        comp.events = response.data;
+                        comp.totalEvents = response.headers['x-total-count'];
                     });
-            });
+                })
+                .catch(() => {
+                    next({ name: 'NetworkError' });
+                })
+                .finally(() => {
+                    Nprogres.done();
+                });
+        },
+
+        beforeRouteUpdate(routeTo) {
+            Nprogres.start();
+
+            EventsService.getEvents(2, parseInt(routeTo.query.page) || 1)
+                .then(response => {
+                    this.events = response.data;
+                    this.totalEvents = response.headers['x-total-count'];
+                })
+                .catch(() => {
+                    return { name: 'NetworkError' };
+                })
+                .finally(() => {
+                    Nprogres.done();
+                });
         },
 
         computed: {
@@ -86,10 +106,23 @@
     .pagination {
         display: flex;
         justify-content: space-between;
+
+        width: 270px;
         margin-top: 10px;
+        padding: 0;
     }
 
-    .pagination a + a {
-        margin-left: 20px;
+    .pagination a {
+        flex: 1;
+        text-decoration: none;
+        color: #2c3e50;
+    }
+
+    #page-prev {
+        text-align: left;
+    }
+
+    #page-next {
+        text-align: right;
     }
 </style>

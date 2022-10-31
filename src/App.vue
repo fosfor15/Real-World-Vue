@@ -1,4 +1,10 @@
 <template>
+    <div
+        id="flash-message"
+        v-if="GStore.flashMessage"
+    >
+        {{ GStore.flashMessage }}
+    </div>
     <nav>
         <RouterLink :to="{ name: 'EventList' }">Events</RouterLink> |
         <RouterLink :to="{ name: 'About' }">About</RouterLink>
@@ -6,10 +12,12 @@
     <RouterView />
 </template>
 
-<!-- <script>
-export default {
-    created() {
-        this.$watch(
+<script>
+    export default {
+        inject: ['GStore'],
+
+        created() {
+            /* this.$watch(
             () => this.$route,
             (newRoute, oldRoute) => {
                 console.log('this.$router :>> ', this.$router);
@@ -17,10 +25,10 @@ export default {
                 // console.log('newRoute :>> ', newRoute);
                 // console.log('oldRoute :>> ', oldRoute);
             }
-        );
-    }
-}
-</script> -->
+        ); */
+        }
+    };
+</script>
 
 <style>
     body {
@@ -33,6 +41,22 @@ export default {
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+    }
+
+    @keyframes yellow-fade {
+        from {
+            background-color: yellow;
+        }
+
+        to {
+            background-color: transparent;
+        }
+    }
+
+    #flash-message {
+        padding: 3px 0;
+        animation-name: yellow-fade;
+        animation-duration: 3s;
     }
 
     nav {
